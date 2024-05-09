@@ -8,22 +8,49 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import coil.compose.AsyncImage
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import kz.vkInternship.pokemon.ui.main.PokemonListScreen
+import kz.vkInternship.pokemon.ui.navigation.Destinations
+import kz.vkInternship.pokemon.ui.pokemonDetails.PokemonDetailsScreen
 import kz.vkInternship.pokemon.ui.theme.PokemonTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            PokemonTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    //testGlide()
-                    PokemonListScreen()
+            PokemonApp()
+//            PokemonTheme {
+//                // A surface container using the 'background' color from the theme
+//                Surface(
+//                    modifier = Modifier.fillMaxSize(),
+//                    color = MaterialTheme.colorScheme.background
+//                ) {
+//                    PokemonListScreen()
+//                }
+//            }
+        }
+    }
+}
+
+
+@Composable
+fun PokemonApp() {
+    PokemonTheme {
+        val navController = rememberNavController()
+
+        Surface(
+            modifier = Modifier.fillMaxSize(),
+            color = MaterialTheme.colorScheme.background
+        ) {
+            NavHost(navController, startDestination = Destinations.Main) {
+                composable(Destinations.Main) {
+                    PokemonListScreen(navController)
+                }
+                composable(Destinations.PokemonDetails.route) { backStackEntry ->
+                    val name = backStackEntry.arguments?.getString(Destinations.PokemonDetails.nameArg)
+                    PokemonDetailsScreen(name = name ?: "")
                 }
             }
         }
@@ -31,7 +58,3 @@ class MainActivity : ComponentActivity() {
 }
 
 
-@Composable
-fun testGlide(url: String = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png"){
-AsyncImage(model = url, contentDescription ="pokemon front" )
-}
