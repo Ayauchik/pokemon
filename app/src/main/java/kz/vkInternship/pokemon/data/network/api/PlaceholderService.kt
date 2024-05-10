@@ -1,5 +1,6 @@
 package kz.vkInternship.pokemon.data.network.api
 
+import kz.vkInternship.pokemon.data.network.response.GetPokemonDetails
 import kz.vkInternship.pokemon.data.network.response.GetPokemonResponse
 import kz.vkInternship.pokemon.data.network.response.GetSprites
 import retrofit2.http.GET
@@ -17,4 +18,9 @@ interface PlaceholderService {
     suspend fun getSprites(
         @Path("idOrName") idOrName: Any
     ): GetSprites
+
+    @GET("pokemon/{name}")
+    suspend fun getPokemonDetails(
+        @Path("name") name: String
+    ): GetPokemonDetails
 }

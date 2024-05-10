@@ -11,8 +11,8 @@ data class GetSprites(
     val name: String,
     val names: List<Any>,
     val order: Int,
-    val pokemon: Pokemon,
+    val pokemon: Result,
     val sprites: Sprites,
     val types: List<Type>,
-    val version_group: VersionGroup
+    val version_group: Result
 )

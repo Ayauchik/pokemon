@@ -36,11 +36,9 @@ fun PokemonListScreen(navController: NavController, viewModel: MainScreenViewMod
                 //modifier = Modifier.background(YellowBack)
             ) {
                 items(pokemonList.value) { pokemon ->
-                    val name = pokemon.name
-                    val url = pokemonMap[pokemon.name]
                     PokemonListItem(pokemon.name, pokemonMap[pokemon.name]!!){
                         navController.navigate(
-                            Destinations.PokemonDetails.creatRoute(
+                            Destinations.PokemonDetails.createRoute(
                                 pokemon.name
                             )
                         )

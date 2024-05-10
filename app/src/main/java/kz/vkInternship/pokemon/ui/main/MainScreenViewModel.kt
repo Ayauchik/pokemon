@@ -40,15 +40,6 @@ class MainScreenViewModel(
                     val sprites = getSpritesOfPokemonByIdOrName.invoke(it.name)
                     //Log.e("sprites", sprites.sprites.toString())
                     _pokemonSpritesMap[it.name] = sprites.sprites.front_default
-//                    _pokemonSpritesMap = _pokemonSpritesMap.value.toMutableMap().apply {
-//                        sprites.sprites.front_default?.let { it1 -> put(it.name, it1) }
-//                    }
-                    //Log.e()
-//                    mapOf( it.name to sprites.sprites.front_default)?.let { it1 ->
-//                        _pokemonSpritesMap.emit(
-//                            it1 as Map<String, String>
-//                        )
-//                    }
                 }
 
                 _isLoading.value = false

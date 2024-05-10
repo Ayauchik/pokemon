@@ -6,5 +6,5 @@ import org.koin.dsl.module
 
 
 val repositoryModule = module {
-    factory<PokemonRepository> { PokemonRepositoryImpl(get(), get(), get()) }
+    factory<PokemonRepository> { PokemonRepositoryImpl(get(), get(), get(), get()) }
 }

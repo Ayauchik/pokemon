@@ -7,7 +7,7 @@ object Destinations {
         const val route = "PokemonDetails/{name}"
         const val nameArg = "name"
 
-        fun creatRoute(name: String): String {
+        fun createRoute(name: String): String {
             return "PokemonDetails/$name"
         }
     }
