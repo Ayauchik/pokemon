@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
@@ -27,6 +28,7 @@ import kz.vkInternship.pokemon.ui.theme.YellowBack
 import kz.vkInternship.pokemon.ui.views.AbilityCard
 import kz.vkInternship.pokemon.ui.views.LocCard
 import kz.vkInternship.pokemon.ui.views.PhysicalPropertiesCard
+import kz.vkInternship.pokemon.ui.views.StatsCard
 import org.koin.androidx.compose.get
 import java.util.Locale
 
@@ -34,11 +36,11 @@ import java.util.Locale
 fun PokemonDetailsScreen(name: String, viewModel: PokemonDetailsScreenViewModel = get()) {
     viewModel.getDetails(name)
 
-    val abilities = viewModel.pokemonAbilities
     val details = viewModel.pokemonDetails.value
+    val abilities = viewModel.pokemonAbilities
     val loading = viewModel.isLoading.value
     val locations = viewModel.pokemonLocations.value
-
+    val stats = details.stats
 
     Box(
         modifier = Modifier
@@ -99,6 +101,36 @@ fun PokemonDetailsScreen(name: String, viewModel: PokemonDetailsScreenViewModel 
                 }
 
                 item {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceEvenly
+                    ) {
+                        Column {
+                            Text(
+                                text = "Locations",
+                                fontWeight = FontWeight.ExtraBold,
+                                fontFamily = FontFamily.Monospace,
+                                color = MainPageText,
+                            )
+                            Spacer(modifier = Modifier.size(8.dp))
+                            LocCard(locations = locations.name)
+                        }
+                       // Spacer(modifier = Modifier.size(12.dp))
+                        Column {
+                            Text(
+                                text = "Stats",
+                                fontWeight = FontWeight.ExtraBold,
+                                fontFamily = FontFamily.Monospace,
+                                color = MainPageText,
+                            )
+                            Spacer(modifier = Modifier.size(8.dp))
+                            StatsCard(stats = stats)
+                        }
+                    }
+                }
+
+
+                item {
                     Column {
                         Text(
                             text = "Abilities",
@@ -118,19 +150,7 @@ fun PokemonDetailsScreen(name: String, viewModel: PokemonDetailsScreenViewModel 
                     }
                     Spacer(modifier = Modifier.size(12.dp))
                 }
-
-                item {
-                    Column {
-                        Text(
-                            text = "Locations",
-                            fontWeight = FontWeight.ExtraBold,
-                            fontFamily = FontFamily.Monospace,
-                            color = MainPageText,
-                        )
-                        Spacer(modifier = Modifier.size(8.dp))
-                        LocCard(locations = locations.name)
-                    }
-                }
+                
 //
 //                items(locations.name){
 //                    LocCard(locations = )
