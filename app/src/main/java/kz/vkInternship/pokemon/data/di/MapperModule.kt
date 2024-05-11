@@ -13,6 +13,7 @@ import kz.vkInternship.pokemon.data.network.mapper.SpritesMapper
 import kz.vkInternship.pokemon.data.network.mapper.StatMapper
 import kz.vkInternship.pokemon.data.network.mapper.TypeMapper
 import kz.vkInternship.pokemon.data.network.mapper.pokemon.PokemonAbilityDetailsMapper
+import kz.vkInternship.pokemon.data.network.mapper.pokemon.PokemonLocationsMapper
 import kz.vkInternship.pokemon.data.network.mapper.versionGroupDetailsMapper
 import org.koin.dsl.module
 
@@ -31,4 +32,5 @@ val mapperModule = module {
     factory { LanguageMapper() }
     factory { EntryEffectsMapper(get()) }
     factory { PokemonAbilityDetailsMapper(get()) }
+    factory { PokemonLocationsMapper() }
 }

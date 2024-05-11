@@ -4,6 +4,7 @@ import kz.vkInternship.pokemon.data.network.response.GetPokemonDetails
 import kz.vkInternship.pokemon.data.network.response.GetPokemonResponse
 import kz.vkInternship.pokemon.data.network.response.GetSprites
 import kz.vkInternship.pokemon.data.network.response.ability.GetAbilityResponse
+import kz.vkInternship.pokemon.data.network.response.location.GetPokemonLocations
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -29,4 +30,9 @@ interface PlaceholderService {
     suspend fun getAbilityDetails(
         @Path("name") name: String
     ): GetAbilityResponse
+
+    @GET("pokemon/{name}/encounters")
+    suspend fun getPokemonLocations(
+        @Path("name") name: String
+    ): GetPokemonLocations
 }

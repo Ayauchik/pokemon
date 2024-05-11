@@ -1,4 +1,4 @@
-package kz.vkInternship.pokemon.domain.model.get
+package kz.vkInternship.pokemon.domain.model.ability
 
 import kz.vkInternship.pokemon.domain.model.Language
 

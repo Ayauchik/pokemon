@@ -3,7 +3,8 @@ package kz.vkInternship.pokemon.domain.repository
 import kz.vkInternship.pokemon.domain.model.PokemonDetails
 import kz.vkInternship.pokemon.domain.model.PokemonSprite
 import kz.vkInternship.pokemon.domain.model.PokemonsModel
-import kz.vkInternship.pokemon.domain.model.get.PokemonAbilityDetails
+import kz.vkInternship.pokemon.domain.model.ability.PokemonAbilityDetails
+import kz.vkInternship.pokemon.domain.model.location.PokemonLocations
 
 interface PokemonRepository {
     suspend fun getPokemons(): PokemonsModel
@@ -12,4 +13,6 @@ interface PokemonRepository {
     suspend fun getPokemonDetails(name: String): PokemonDetails
 
     suspend fun getAbilityDetails(name: String): PokemonAbilityDetails
+
+    suspend fun getPokemonLocations(name: String): PokemonLocations
 }

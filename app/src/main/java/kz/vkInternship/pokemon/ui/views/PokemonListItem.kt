@@ -17,11 +17,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.SubcomposeAsyncImage
-import kz.vkInternship.pokemon.ui.theme.DarkRedText
+import kz.vkInternship.pokemon.ui.theme.MainPageText
 import kz.vkInternship.pokemon.ui.theme.OrangeBack
 import java.util.Locale
 
@@ -62,8 +63,9 @@ fun PokemonListItem(name: String, url: String, onClick: () -> Unit) {
                 text = name.replaceFirstChar {
                     if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() },
                 style = TextStyle(fontSize = 20.sp),
-                color = DarkRedText,
-                fontWeight = FontWeight.W800
+                color = MainPageText,
+                fontWeight = FontWeight.W800,
+                fontFamily = FontFamily.Monospace
             )
         }
     }

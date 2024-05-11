@@ -8,12 +8,15 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import kz.vkInternship.pokemon.domain.model.PokemonDetails
+import kz.vkInternship.pokemon.domain.model.location.PokemonLocations
 import kz.vkInternship.pokemon.domain.use_cases.GetAbilityDetailsUseCase
 import kz.vkInternship.pokemon.domain.use_cases.GetPokemonDetailsUseCase
+import kz.vkInternship.pokemon.domain.use_cases.GetPokemonLocationsUseCase
 
 class PokemonDetailsScreenViewModel(
     private val getPokemonDetailsUseCase: GetPokemonDetailsUseCase,
-    private val getAbilityDetailsUseCase: GetAbilityDetailsUseCase
+    private val getAbilityDetailsUseCase: GetAbilityDetailsUseCase,
+    private val getPokemonLocationsUseCase: GetPokemonLocationsUseCase
 ) : ViewModel() {
 
     private val _pokemonDetails = mutableStateOf<PokemonDetails>(
@@ -34,8 +37,8 @@ class PokemonDetailsScreenViewModel(
     )
     val pokemonDetails: State<PokemonDetails> get() = _pokemonDetails
 
-//    private var _pokemonAbilities = mutableStateListOf<PokemonAbilityDetails>()
-//    val pokemonAbilities: SnapshotStateList<PokemonAbilityDetails> = _pokemonAbilities
+    private val _pokemonLocations = mutableStateOf(PokemonLocations(emptyList()))
+    val pokemonLocations: State<PokemonLocations> get() = _pokemonLocations
 
     private val _pokemonAbilities = mutableStateMapOf<String, List<String>>()
     val pokemonAbilities: SnapshotStateMap<String, List<String>> = _pokemonAbilities
@@ -61,6 +64,9 @@ class PokemonDetailsScreenViewModel(
                 }
                 // _pokemonAbilities.add(abilityDetails)
             }
+
+            val locations = getPokemonLocationsUseCase.invoke(name)
+            _pokemonLocations.value = locations
 
             _isLoading.value = false
         }

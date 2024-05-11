@@ -2,6 +2,7 @@ package kz.vkInternship.pokemon.ui.views
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Card
@@ -28,7 +29,9 @@ fun AbilityCard(name: String, abilities: List<String>) {
         elevation = CardDefaults.cardElevation(4.dp),
         modifier = Modifier.size(width = 200.dp, height = 160.dp).fillMaxHeight()
     ) {
-        LazyColumn {
+        LazyColumn(
+            modifier = Modifier.padding(start = 4.dp)
+        ) {
             item {
                 Row {
                     Text(

@@ -1,7 +1,7 @@
 package kz.vkInternship.pokemon.data.network.mapper
 
 import kz.vkInternship.pokemon.data.network.response.ability.EffectEntryX
-import kz.vkInternship.pokemon.domain.model.get.EffectEntries
+import kz.vkInternship.pokemon.domain.model.ability.EffectEntries
 
 class EntryEffectsMapper(
     private val languageMapper: LanguageMapper

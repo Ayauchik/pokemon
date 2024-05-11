@@ -1,4 +1,4 @@
-package kz.vkInternship.pokemon.domain.model.get
+package kz.vkInternship.pokemon.domain.model.ability
 
 data class PokemonAbilityDetails (
     val id: Int,
