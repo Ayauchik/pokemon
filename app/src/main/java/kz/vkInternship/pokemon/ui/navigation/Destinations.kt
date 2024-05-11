@@ -6,9 +6,15 @@ object Destinations {
     object PokemonDetails {
         const val route = "PokemonDetails/{name}"
         const val nameArg = "name"
+       // const val urlArg = "url"
 
-        fun creatRoute(name: String): String {
+
+        fun createRoute(name: String): String {
             return "PokemonDetails/$name"
         }
+/*
+        fun createRoute(name: String, url: String): String {
+            return "PokemonDetails/$name/$url"
+        }*/
     }
 }

@@ -21,15 +21,6 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             PokemonApp()
-//            PokemonTheme {
-//                // A surface container using the 'background' color from the theme
-//                Surface(
-//                    modifier = Modifier.fillMaxSize(),
-//                    color = MaterialTheme.colorScheme.background
-//                ) {
-//                    PokemonListScreen()
-//                }
-//            }
         }
     }
 }
@@ -49,7 +40,9 @@ fun PokemonApp() {
                     PokemonListScreen(navController)
                 }
                 composable(Destinations.PokemonDetails.route) { backStackEntry ->
-                    val name = backStackEntry.arguments?.getString(Destinations.PokemonDetails.nameArg)
+                    val name =
+                        backStackEntry.arguments?.getString(Destinations.PokemonDetails.nameArg)
+
                     PokemonDetailsScreen(name = name ?: "")
                 }
             }

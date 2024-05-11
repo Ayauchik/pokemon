@@ -24,7 +24,9 @@ fun PokemonListScreen(navController: NavController, viewModel: MainScreenViewMod
     val isLoading = viewModel.isLoading
 
     Box(
-        modifier = Modifier.fillMaxSize().background(YellowBack),
+        modifier = Modifier
+            .fillMaxSize()
+            .background(YellowBack),
         contentAlignment = Alignment.Center
     ) {
         if (isLoading.value) {
@@ -36,12 +38,11 @@ fun PokemonListScreen(navController: NavController, viewModel: MainScreenViewMod
                 //modifier = Modifier.background(YellowBack)
             ) {
                 items(pokemonList.value) { pokemon ->
-                    val name = pokemon.name
-                    val url = pokemonMap[pokemon.name]
-                    PokemonListItem(pokemon.name, pokemonMap[pokemon.name]!!){
+                    PokemonListItem(pokemon.name, pokemonMap[pokemon.name]!!) {
                         navController.navigate(
-                            Destinations.PokemonDetails.creatRoute(
-                                pokemon.name
+                            Destinations.PokemonDetails.createRoute(
+                                pokemon.name,
+//                                pokemonMap[pokemon.name]!!
                             )
                         )
                     }
