@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -23,6 +24,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.SubcomposeAsyncImage
+import kz.vkInternship.pokemon.ui.theme.DarkRedText
 import kz.vkInternship.pokemon.ui.theme.YellowBack
 import kz.vkInternship.pokemon.ui.views.AbilityCard
 import kz.vkInternship.pokemon.ui.views.PhysicalPropertiesCard
@@ -32,8 +34,11 @@ import java.util.Locale
 @Composable
 fun PokemonDetailsScreen(name: String, viewModel: PokemonDetailsScreenViewModel = get()) {
     viewModel.getDetails(name)
+
+    val abilities = viewModel.pokemonAbilities
     val details = viewModel.pokemonDetails.value
     val loading = viewModel.isLoading.value
+
 
     Box(
         modifier = Modifier
@@ -68,12 +73,11 @@ fun PokemonDetailsScreen(name: String, viewModel: PokemonDetailsScreenViewModel 
                             model = details.frontUrl,
                             contentDescription = "Pokemon Front",
                             modifier = Modifier
-                                .size(height = 220.dp, width = 180.dp)
-                                .border(width = 4.dp, color = Color.Black),
+                                .size(height = 160.dp, width = 160.dp),
+                               // .border(width = 4.dp, color = Color.Black),
                             contentScale = ContentScale.FillHeight,
                             loading = { CircularProgressIndicator() },
                         )
-                        Spacer(modifier = Modifier.size(12.dp))
                         Column(
                             verticalArrangement = Arrangement.spacedBy(4.dp)
                         ) {
@@ -85,17 +89,36 @@ fun PokemonDetailsScreen(name: String, viewModel: PokemonDetailsScreenViewModel 
                                 fontSize = 24.sp,
                                 fontWeight = FontWeight.Bold
                             )
-
+                            Text(
+                                text = "Properties",
+                                fontWeight = FontWeight.ExtraBold,
+                                fontFamily = FontFamily.Monospace,
+                                color = DarkRedText,
+                            )
                             PhysicalPropertiesCard(details = details)
                         }
                     }
-                }
-                item {
-                    Text(details.name)
+                    Spacer(modifier = Modifier.size(4.dp))
                 }
 
                 item {
-                    AbilityCard(abilities = details.abilities)
+                    Column {
+                        Text(
+                            text = "Abilities",
+                            fontWeight = FontWeight.ExtraBold,
+                            fontFamily = FontFamily.Monospace,
+                            color = DarkRedText,
+                        )
+                        Spacer(modifier = Modifier.size(8.dp))
+                        LazyRow {
+                            abilities.forEach{
+                                item {
+                                    AbilityCard(name = it.key, abilities = it.value)
+                                    Spacer(modifier = Modifier.size(12.dp))
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }

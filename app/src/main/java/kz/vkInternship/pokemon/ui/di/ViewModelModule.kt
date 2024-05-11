@@ -6,5 +6,5 @@ import org.koin.dsl.module
 
 val viewModelModule = module {
     factory { MainScreenViewModel(get(), get()) }
-    factory { PokemonDetailsScreenViewModel(get()) }
+    factory { PokemonDetailsScreenViewModel(get(), get()) }
 }

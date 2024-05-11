@@ -2,10 +2,8 @@ package kz.vkInternship.pokemon.ui.views
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
@@ -32,17 +30,13 @@ fun PhysicalPropertiesCard(details: PokemonDetails) {
             horizontalAlignment = Alignment.Start,
             modifier = Modifier
                 .fillMaxWidth(.95f)
-                .padding(start = 8.dp)
+                .padding(start = 4.dp)
         ) {
-            Text(
-                text = "Properties",
-                fontWeight = FontWeight.Bold
-            )
-            Spacer(modifier = Modifier.size(4.dp))
+
             Row {
                 Text(
                     text = "Height: ",
-                    fontWeight = FontWeight.SemiBold
+                    fontWeight = FontWeight.SemiBold,
                 )
                 Text(text = "${details.height}")
             }
