@@ -114,8 +114,9 @@ fun PokemonDetailsScreen(name: String, viewModel: PokemonDetailsScreenViewModel 
                             )
                             Spacer(modifier = Modifier.size(8.dp))
                             LocCard(locations = locations.name)
+
                         }
-                       // Spacer(modifier = Modifier.size(12.dp))
+                        // Spacer(modifier = Modifier.size(12.dp))
                         Column {
                             Text(
                                 text = "Stats",
@@ -128,6 +129,7 @@ fun PokemonDetailsScreen(name: String, viewModel: PokemonDetailsScreenViewModel 
                         }
                     }
                 }
+
 
 
                 item {
