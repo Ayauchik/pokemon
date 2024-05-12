@@ -3,6 +3,7 @@ package kz.vkInternship.pokemon.ui.main
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -35,35 +36,51 @@ fun PokemonListScreen(navController: NavController, viewModel: MainScreenViewMod
         if (isLoading.value) {
             CircularProgressIndicator()
         } else {
-            LazyColumn(
+            Column(
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally,
-                //modifier = Modifier.background(YellowBack)
             ) {
-                item {
-                    PaginationControl(
-                        currentPage = viewModel.currentPage.value,
-                        totalPages = totalCount.value / 20 + 1,
-                        onNextClicked = {
-                            viewModel.onNextClicked()
-                        },
-                        onPreviousClicked = {
-                            viewModel.onPreviousClicked()
-                        }) {
-                        viewModel.onPageClicked(it)
-                    }
+                PaginationControl(
+                    currentPage = viewModel.currentPage.value,
+                    totalPages = totalCount.value / 20 + 1,
+                    onNextClicked = {
+                        viewModel.onNextClicked()
+                    },
+                    onPreviousClicked = {
+                        viewModel.onPreviousClicked()
+                    }) {
+                    viewModel.onPageClicked(it)
                 }
-                items(pokemonList.value) { pokemon ->
-                    var url = pokemonMap[pokemon.name]
-                    if(url == null){
-                        url = ""
-                    }
-                    PokemonListItem(pokemon.name, url) {
-                        navController.navigate(
-                            Destinations.PokemonDetails.createRoute(
-                                pokemon.name,
+                LazyColumn(
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    //modifier = Modifier.background(YellowBack)
+                ) {
+//                    item {
+//                        PaginationControl(
+//                            currentPage = viewModel.currentPage.value,
+//                            totalPages = totalCount.value / 20 + 1,
+//                            onNextClicked = {
+//                                viewModel.onNextClicked()
+//                            },
+//                            onPreviousClicked = {
+//                                viewModel.onPreviousClicked()
+//                            }) {
+//                            viewModel.onPageClicked(it)
+//                        }
+//                    }
+                    items(pokemonList.value) { pokemon ->
+                        var url = pokemonMap[pokemon.name]
+                        if (url == null) {
+                            url = ""
+                        }
+                        PokemonListItem(pokemon.name, url) {
+                            navController.navigate(
+                                Destinations.PokemonDetails.createRoute(
+                                    pokemon.name,
+                                )
                             )
-                        )
+                        }
                     }
                 }
             }
