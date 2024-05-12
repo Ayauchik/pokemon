@@ -2,6 +2,7 @@ package kz.vkInternship.pokemon.ui.main
 
 import android.util.Log
 import androidx.compose.runtime.State
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateMapOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.snapshots.SnapshotStateMap
@@ -26,6 +27,16 @@ class MainScreenViewModel(
 
     private val _isLoading = mutableStateOf(true)
     val isLoading: State<Boolean> get() = _isLoading
+
+    private val _totalPokemons = mutableIntStateOf(0)
+    val totalPokemons: State<Int> get() = _totalPokemons
+
+    private var offset = 0
+    private val limit = 20
+    private val _currentPage = mutableIntStateOf(1)
+    val currentPage: State<Int> get() = _currentPage
+
+
     init {
         getPokemonList()
     }
@@ -33,12 +44,12 @@ class MainScreenViewModel(
     private fun getPokemonList() {
         viewModelScope.launch {
             try {
-                val pokemons = getPokemonsUseCase.invoke()
+                val pokemons = getPokemonsUseCase.invoke(offset, limit)
+                _totalPokemons.intValue = pokemons.count
                 _pokemonList.value = pokemons.pokemons!!
 
                 pokemons.pokemons.forEach {
                     val sprites = getSpritesOfPokemonByIdOrName.invoke(it.name)
-                    //Log.e("sprites", sprites.sprites.toString())
                     _pokemonSpritesMap[it.name] = sprites.sprites.front_default
                 }
 
@@ -49,5 +60,26 @@ class MainScreenViewModel(
                 // Handle error if needed
             }
         }
+    }
+
+    fun onNextClicked() {
+        _isLoading.value = true
+        offset += limit
+        _currentPage.intValue++
+        getPokemonList()
+    }
+
+    fun onPreviousClicked() {
+        _isLoading.value = true
+        offset = maxOf(0, offset - limit)
+        _currentPage.intValue++
+        getPokemonList()
+    }
+
+    fun onPageClicked(page: Int){
+        _isLoading.value = true
+        offset = (page - 1)*limit
+        _currentPage.intValue = page
+        getPokemonList()
     }
 }

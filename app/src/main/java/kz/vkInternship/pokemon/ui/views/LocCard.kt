@@ -2,6 +2,8 @@ package kz.vkInternship.pokemon.ui.views
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -27,14 +29,20 @@ fun LocCard(locations: List<String>){
         Column(
             verticalArrangement = Arrangement.spacedBy(4.dp),
             horizontalAlignment = Alignment.Start,
-            modifier = Modifier.padding(start = 4.dp)
+            modifier = Modifier
+                .padding(start = 4.dp, end = 8.dp)
+                .fillMaxWidth(0.5f)
+                .fillMaxHeight(0.3f)
         ) {
+
             locations.forEach { location ->
                 val formattedLocation = location.replace("-", " ")
                     .replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.ROOT) else it.toString() }
                 Text(text = formattedLocation)
+//                item {
+//                    Text(text = formattedLocation)
+//                }
             }
-
         }
     }
 }

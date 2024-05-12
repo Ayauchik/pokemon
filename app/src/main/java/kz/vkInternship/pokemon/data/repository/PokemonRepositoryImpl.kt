@@ -21,8 +21,8 @@ class PokemonRepositoryImpl(
     private val pokemonAbilityDetailsMapper: PokemonAbilityDetailsMapper,
     private val pokemonLocationsMapper: PokemonLocationsMapper
 ) : PokemonRepository {
-    override suspend fun getPokemons(): PokemonsModel {
-        return pokemonsMapper.fromRemoteToDomain(placeholderService.getPokemons())
+    override suspend fun getPokemons(offset: Int, limit: Int): PokemonsModel {
+        return pokemonsMapper.fromRemoteToDomain(placeholderService.getPokemons(offset, limit))
     }
 
     override suspend fun getSpritesOfPokemonByIdOrName(idOrName: Any): PokemonSprite {

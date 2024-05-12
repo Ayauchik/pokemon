@@ -51,13 +51,17 @@ fun PokemonListItem(name: String, url: String, onClick: () -> Unit) {
                     .padding(end = 16.dp)
                     .size(72.dp)
             ) {
-                SubcomposeAsyncImage(
-                    model = url,
-                    contentDescription = "Pokemon Front",
-                    modifier = Modifier.fillMaxSize(),
-                    contentScale = ContentScale.Fit,
-                    loading = { CircularProgressIndicator()}
-                )
+                if(url == ""){
+                    Text(text = "image not founded")
+                }else{
+                    SubcomposeAsyncImage(
+                        model = url,
+                        contentDescription = "Pokemon Front",
+                        modifier = Modifier.fillMaxSize(),
+                        contentScale = ContentScale.Fit,
+                        loading = { CircularProgressIndicator()}
+                    )
+                }
             }
             Text(
                 text = name.replaceFirstChar {

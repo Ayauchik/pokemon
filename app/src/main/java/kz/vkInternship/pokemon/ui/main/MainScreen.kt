@@ -13,6 +13,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import kz.vkInternship.pokemon.ui.navigation.Destinations
+import kz.vkInternship.pokemon.ui.navigation.PaginationControl
 import kz.vkInternship.pokemon.ui.theme.YellowBack
 import kz.vkInternship.pokemon.ui.views.PokemonListItem
 import org.koin.androidx.compose.get
@@ -22,6 +23,8 @@ fun PokemonListScreen(navController: NavController, viewModel: MainScreenViewMod
     val pokemonList = viewModel.pokemonList.collectAsState()
     val pokemonMap = viewModel.pokemonSpritesMap
     val isLoading = viewModel.isLoading
+    val totalCount = viewModel.totalPokemons
+
 
     Box(
         modifier = Modifier
@@ -37,12 +40,28 @@ fun PokemonListScreen(navController: NavController, viewModel: MainScreenViewMod
                 horizontalAlignment = Alignment.CenterHorizontally,
                 //modifier = Modifier.background(YellowBack)
             ) {
+                item {
+                    PaginationControl(
+                        currentPage = viewModel.currentPage.value,
+                        totalPages = totalCount.value / 20 + 1,
+                        onNextClicked = {
+                            viewModel.onNextClicked()
+                        },
+                        onPreviousClicked = {
+                            viewModel.onPreviousClicked()
+                        }) {
+                        viewModel.onPageClicked(it)
+                    }
+                }
                 items(pokemonList.value) { pokemon ->
-                    PokemonListItem(pokemon.name, pokemonMap[pokemon.name]!!) {
+                    var url = pokemonMap[pokemon.name]
+                    if(url == null){
+                        url = ""
+                    }
+                    PokemonListItem(pokemon.name, url) {
                         navController.navigate(
                             Destinations.PokemonDetails.createRoute(
                                 pokemon.name,
-//                                pokemonMap[pokemon.name]!!
                             )
                         )
                     }

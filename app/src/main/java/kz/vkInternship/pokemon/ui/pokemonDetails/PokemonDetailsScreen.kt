@@ -103,7 +103,7 @@ fun PokemonDetailsScreen(name: String, viewModel: PokemonDetailsScreenViewModel 
                 item {
                     Row(
                         modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceEvenly
+                        horizontalArrangement = Arrangement.spacedBy(12.dp)
                     ) {
                         Column {
                             Text(
@@ -150,11 +150,6 @@ fun PokemonDetailsScreen(name: String, viewModel: PokemonDetailsScreenViewModel 
                     }
                     Spacer(modifier = Modifier.size(12.dp))
                 }
-                
-//
-//                items(locations.name){
-//                    LocCard(locations = )
-//                }
             }
         }
     }

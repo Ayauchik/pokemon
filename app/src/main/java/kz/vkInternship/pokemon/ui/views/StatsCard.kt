@@ -23,11 +23,11 @@ fun StatsCard(stats: List<Stat>){
         elevation = CardDefaults.cardElevation(4.dp)
     ) {
         Column(
-            modifier = Modifier.padding(start = 4.dp)
+            modifier = Modifier.padding(start = 4.dp, end = 8.dp)
         ) {
             stats.forEach{
                 Row {
-                    Text(text = "${it.stat.name}: ")
+                    Text(text = "${it.stat.name}: ".replace("-", " "))
                     Text(text = it.base_stat.toString())
                 }
             }

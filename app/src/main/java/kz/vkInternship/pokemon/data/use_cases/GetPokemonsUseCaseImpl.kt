@@ -7,7 +7,7 @@ import kz.vkInternship.pokemon.domain.use_cases.GetPokemonsUseCase
 class GetPokemonsUseCaseImpl(
     private val pokemonRepository: PokemonRepository
 ): GetPokemonsUseCase {
-    override suspend fun invoke(): PokemonsModel {
-        return pokemonRepository.getPokemons()
+    override suspend fun invoke(offset: Int, limit: Int): PokemonsModel {
+        return pokemonRepository.getPokemons(offset, limit)
     }
 }
